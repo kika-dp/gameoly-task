@@ -1,0 +1,57 @@
+service: GAMEOLY-PROJECT
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  environment:
+    MONGODB_URI: mongodb://localhost:27017/employee-management
+    JWT_SECRET: "@123Gameoly"
+
+functions:
+  createEmployee:
+    handler: handler.postemployee
+    events:
+      - http:
+          path: employee
+          method: post
+          cors: true
+
+  getEmployee:
+    handler: handler.getemployee{id}
+    events:
+      - http:
+          path: employee/{id}
+          method: get
+          cors: true
+
+  listEmployees:
+    handler: handler.getemployees
+    events:
+      - http:
+          path: employees
+          method: get
+          cors: true
+
+  updateEmployee:
+    handler: handler.putemployee{id}
+    events:
+      - http:
+          path: employee/{id}
+          method: put
+          cors: true
+
+  deleteEmployee:
+    handler: handler.deleteemployee{id}
+    events:
+      - http:
+          path: employee/{id}
+          method: delete
+          cors: true
+
+  generateToken:
+    handler: handler.posttoken
+    events:
+      - http:
+          path: token
+          method: post
+          cors: true
